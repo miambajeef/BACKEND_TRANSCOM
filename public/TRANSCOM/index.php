@@ -9,25 +9,26 @@ if(isset($_POST['submit'])){
 $nom_ut=htmlspecialchars($_POST['nom_ut']);
 $mdp_ut=htmlspecialchars($_POST['mdp_ut']);
 
-$req="SELECT * FROM utilisateur WHERE nom_ut='".$nom_ut."' AND mdp_ut='".$mdp_ut."' AND act_desact=1 AND role='roullage' limit 1";
+$req="SELECT * FROM utilisateur WHERE nom_ut='".$nom_ut."' AND mdp_ut='".$mdp_ut."' AND act_desact=1 AND role='operateur' limit 1";
 
 $res=mysqli_query($conn,$req);
 
-if(mysqli_num_rows($res)==1){
+if(mysqli_num_rows($res)>=1){
 $_SESSION['nom_ut'] =htmlentities ($_POST['nom_ut']);
 
-header('location: dashboard_roullage.php');
-
+header('location: dashboard_operateur.php');
 }
-else{
- $req="SELECT * FROM utilisateur WHERE nom_ut='".$nom_ut."' AND mdp_ut='".$mdp_ut."' AND act_desact=1 AND role='operateur' limit 1";
+
+elseif(mysqli_num_rows($res)!==1) {
+
+ $req="SELECT * FROM utilisateur WHERE nom_ut='".$nom_ut."' AND mdp_ut='".$mdp_ut."' AND act_desact=1 AND role='roullage' limit 1";
 
 $res=mysqli_query($conn,$req);
  
-header('location:dashboard_operateur.php'); 
 $_SESSION['nom_ut'] =htmlentities ($_POST['nom_ut']);
-
+header('location:dashboard_roullage.php'); 
 }
+
 }
 
 ?>
@@ -39,7 +40,6 @@ $_SESSION['nom_ut'] =htmlentities ($_POST['nom_ut']);
   </head>
   <body>
 
-   
               <h2 class="mb-4">Connectez-vous</h2>
               <form method="POST" action="" >
                

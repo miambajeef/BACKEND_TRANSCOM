@@ -83,7 +83,7 @@ $res2=mysqli_query($conn,$req2) or die(mysqli_error());
   <input type="submit" name="submit" value="Enregistrer">
 </form>
 
-       <h2 class="mb-4">APERCU GENERAL TAXE VOIRIE</h2>
+       <h2 class="mb-4">APERCU GENERAL VIGNETTE</h2>
 
       <hr class="two">
       <?php

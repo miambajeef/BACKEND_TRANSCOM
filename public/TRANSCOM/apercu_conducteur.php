@@ -9,7 +9,7 @@ include('menu_cond.php');
 
 ?>
 <form  method="GET" action="chercher_conducteur.php">
-         <input id="search-input" name="recherche_nom_cond" value="" placeholder="chercher Proprietaire"  type="text" >
+         <input id="search-input" name="recherche_nom_cond" value="" placeholder="chercher Conducteur"  type="text" >
          
          <button type="submit"  name="submit">Go</button>
          </span> 
@@ -89,6 +89,50 @@ echo "Vrai chuaffeur".'<br>';
       <hr>
       <?php }?>
       
+<h2 class="mb-4">APERCU GENERAL PERMIS</h2>
+
+      <hr class="two">
+      <?php
+      $req=("SELECT * FROM permis WHERE id_pro_cond_fk='".$_SESSION['id_cond']."' ORDER BY date_enreg_permis DESC ");
+      $res=mysqli_query($conn,$req) or die(mysqli_error());
+      ?>
+
+      <?php while ($aff=mysqli_fetch_assoc($res)){?>
+
+TYPE: <?php echo ($aff['type_permis'])?><br>
+DATE LIVRAISON: <?php echo ($aff['date_livraison_permis'])?><br>
+DATE EXPIRATION: <?php echo ($aff['date_expiration_permis'])?><br>
+
+      <?php $x=abs(floor(strtotime($aff['date_expiration_permis'])/ (60*60*24)));
+      //echo " Nbre de Jrs jusqu'a l'exp: ".$z."</br>";  ?>
+      <?php  $date_jour= date('Y/m/d'); ?>
+     
+      <?php $z=abs(floor(strtotime($aff['date_livraison_permis'])/ (60*60*24)));
+      $y=abs(floor(strtotime($date_jour)/ (60*60*24)));
+     
+
+   $rest_jours=$x-$y;
+      
+      echo $x-$z .' Jour(s) de validité'.'<br>'; 
+      //echo $z .'<br>'; 
+      //echo $rest_jours .'<br>';
+      ?>  
+
+     <?php
+      if($rest_jours>=0){
+
+        echo $alerte='<strong>'.'<p class="">'."Le permis de conduire reste avec ". $rest_jours.' Jour(s)'.'</p>'.'</strong>';
+      }
+
+      elseif($rest_jours<0){
+         echo $alerte='<strong>'.'<p class="blue" >'."Le permis a expiré il y a ".$rest_jours.'</p>'.'<strong>';
+      }
+      ?>
+      
+<hr>
+      <?php }?>
+
+
 <?php
  //include('footer.php');
  ?>

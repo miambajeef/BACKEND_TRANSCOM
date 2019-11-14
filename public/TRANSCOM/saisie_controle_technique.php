@@ -56,7 +56,7 @@ $res2=mysqli_query($conn,$req2) or die(mysqli_error());
  <?php while ($aff2=mysqli_fetch_assoc($res2)){?>
         
 <input class="text" type="hidden" name="id_ut_fk" value="<?php echo ($aff2['id_ut'])?>">
-<input class="text" type="hidden" name="nom_ut_fk" value="<?php echo ($aff2['nom_ut'])?>">
+<input class="text" type="hidde" name="nom_ut_fk" value="<?php echo ($aff2['nom_ut'])?>">
                   
 <?php }?>
 

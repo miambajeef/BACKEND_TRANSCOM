@@ -21,15 +21,18 @@ $res=mysqli_query($conn,$req) or die(mysqli_error());
          </span> 
     </form>
     
+    <form  method="GET" action="chercher_pro_cond_roullage.php">
+         <input id="search-input" name="motcle" value="" placeholder="chercher conducteur"  type="text" >
+         <button type="submit"  name="submit">Go</button>
+         </span> 
+    </form>
+
     <a href="deconnexion.php">deconnexion</a><br>
-    nom de l'operateur est: <?php echo ($aff['nom_ut'])?></h4>
+    nom de l'operateur est: <?php echo ($aff['nom_ut'])?></h4><br>
     
-   <a href="liste_moyen_transport.php">Liste Moyen de Transport</a><br>
+   <!-- <a href="liste_moyen_transport.php">Liste Moyen de Transport</a><br> -->
 
-     <a href="statistique.php">Staistique</a><br>
-
-
-
+     <!-- <a href="statistique.php">Staistique</a><br> -->
 </body>
 </html>
 
